@@ -1,6 +1,9 @@
 {
   "name": "terratest-fixture-function",
   "version": "1.0.0",
-  "description": "Función de ejemplo para pruebas Terratest",
-  "main": "index.js"
+  "description": "Función Gen 2 de ejemplo para pruebas Terratest",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0"
+  }
 }

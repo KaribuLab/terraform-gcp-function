@@ -1,22 +1,30 @@
 output "function_id" {
   description = "The ID of the function"
-  value       = google_cloudfunctions_function.function.id
+  value       = google_cloudfunctions2_function.function.id
 }
 
-output "function_https_trigger_url" {
-  description = "The HTTPS trigger URL of the function"
-  value       = google_cloudfunctions_function.function.https_trigger_url
+output "function_name" {
+  description = "The name of the function"
+  value       = google_cloudfunctions2_function.function.name
+}
+
+output "function_url" {
+  description = "The URL of the function"
+  value       = google_cloudfunctions2_function.function.service_config[0].uri
   sensitive   = true
-  depends_on  = [google_cloudfunctions_function.function]
 }
 
-output "function_status" {
-  description = "The status of the function"
-  value       = google_cloudfunctions_function.function.status
-  depends_on  = [google_cloudfunctions_function.function]
+output "function_state" {
+  description = "The state of the function"
+  value       = google_cloudfunctions2_function.function.state
 }
 
 output "service_account_email" {
   description = "The email of the service account"
   value       = google_service_account.service_account.email
+}
+
+output "function_environment" {
+  description = "The environment of the function"
+  value       = google_cloudfunctions2_function.function.environment
 }

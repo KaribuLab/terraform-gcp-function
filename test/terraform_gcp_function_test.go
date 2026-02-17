@@ -49,11 +49,11 @@ func TestTerraformGcpFunction(t *testing.T) {
 	functionID := terraform.Output(t, terraformOptions, "function_id")
 	assert.NotEmpty(t, functionID, "function_id no debe estar vacío")
 
-	functionStatus := terraform.Output(t, terraformOptions, "function_status")
-	assert.Equal(t, "ACTIVE", functionStatus, "La función debe estar ACTIVE")
+	functionState := terraform.Output(t, terraformOptions, "function_state")
+	assert.Equal(t, "ACTIVE", functionState, "La función debe estar ACTIVE")
 
-	functionURL := terraform.Output(t, terraformOptions, "function_https_trigger_url")
-	require.NotEmpty(t, functionURL, "La URL del trigger HTTPS no debe estar vacía")
+	functionURL := terraform.Output(t, terraformOptions, "function_url")
+	require.NotEmpty(t, functionURL, "La URL de la función no debe estar vacía")
 
 	// 2. Validar funcionalidad HTTP
 	validateHTTPResponse(t, functionURL)
