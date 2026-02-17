@@ -1,0 +1,6 @@
+{
+  "name": "terratest-fixture-function",
+  "version": "1.0.0",
+  "description": "Función de ejemplo para pruebas Terratest",
+  "main": "index.js"
+}

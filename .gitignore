@@ -1,0 +1,9 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Test artifacts
+test/index.zip
+test/.terraform/
+.terraform.lock.hcl
