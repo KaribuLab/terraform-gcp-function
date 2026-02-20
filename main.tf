@@ -23,7 +23,7 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_project_iam_member" "function_roles" {
-  for_each = toset(var.function_iam_roles)
+  for_each = toset(concat(var.function_iam_roles, ["roles/cloudbuild.builds.builder"]))
   project  = var.project_id
   role     = each.value
   member   = "serviceAccount:${google_service_account.service_account.email}"
@@ -36,9 +36,10 @@ resource "google_cloudfunctions2_function" "function" {
   project     = var.project_id
 
   build_config {
-    runtime     = var.function_runtime
-    entry_point = var.function_entry_point
-    
+    runtime         = var.function_runtime
+    entry_point     = var.function_entry_point
+    service_account = google_service_account.service_account.id
+
     source {
       storage_source {
         bucket = var.bucket_name
