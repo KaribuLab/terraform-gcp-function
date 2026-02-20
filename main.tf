@@ -1,5 +1,5 @@
 locals {
-  zip_name          = "index.zip"
+  zip_name          = "${var.function_name}/index.zip"
   zip_name_location = "${var.zip_location}/${local.zip_name}"
 }
 
