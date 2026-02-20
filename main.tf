@@ -114,7 +114,8 @@ resource "google_cloudfunctions2_function" "function" {
   labels = var.function_labels
 
   depends_on = [
-    google_project_iam_member.function_roles
+    google_project_iam_member.function_roles,
+    google_service_account_iam_member.deployer_sa_user,
   ]
 }
 
