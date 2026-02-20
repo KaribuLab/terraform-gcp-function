@@ -63,7 +63,7 @@ resource "google_cloudfunctions2_function" "function" {
     environment_variables = var.function_environment_variables
 
     dynamic "secret_environment_variables" {
-      for_each = var.function_secret_environment_variables != null ? nonsensitive(var.function_secret_environment_variables) : {}
+      for_each = nonsensitive(var.function_secret_environment_variables)
       content {
         key        = secret_environment_variables.key
         project_id = var.project_id
@@ -73,7 +73,7 @@ resource "google_cloudfunctions2_function" "function" {
     }
 
     dynamic "secret_volumes" {
-      for_each = var.function_secret_volumes != null ? nonsensitive(var.function_secret_volumes) : {}
+      for_each = nonsensitive(var.function_secret_volumes)
       content {
         mount_path = secret_volumes.value.mount_path
         project_id = var.project_id

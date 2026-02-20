@@ -114,7 +114,7 @@ variable "function_secret_environment_variables" {
     secret  = string
     version = optional(string, "latest")
   }))
-  default   = null
+  default   = {}
   sensitive = true
 }
 
@@ -128,7 +128,7 @@ variable "function_secret_volumes" {
       path    = string
     })), null)
   }))
-  default   = null
+  default   = {}
   sensitive = true
 }
 
