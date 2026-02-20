@@ -127,6 +127,13 @@ resource "google_cloud_run_service_iam_member" "invoker" {
   member   = each.value
 }
 
+resource "google_service_account_iam_member" "deployer_sa_user" {
+  count              = var.function_deployer_service_account != null ? 1 : 0
+  service_account_id = google_service_account.service_account.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${var.function_deployer_service_account}"
+}
+
 resource "google_cloud_run_service_iam_member" "trigger_invoker" {
   count    = var.function_event_trigger != null ? 1 : 0
   project  = google_cloudfunctions2_function.function.project

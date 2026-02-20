@@ -155,6 +155,12 @@ variable "function_event_trigger_region" {
 }
 
 # IAM
+variable "function_deployer_service_account" {
+  description = "Email de la SA que despliega la función (necesita actAs sobre la SA de la función)"
+  type        = string
+  default     = null
+}
+
 variable "function_iam_roles" {
   description = "List of IAM roles to grant to the function's service account"
   type        = list(string)
