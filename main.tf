@@ -126,3 +126,12 @@ resource "google_cloud_run_service_iam_member" "invoker" {
   role     = "roles/run.invoker"
   member   = each.value
 }
+
+resource "google_cloud_run_service_iam_member" "trigger_invoker" {
+  count    = var.function_event_trigger != null ? 1 : 0
+  project  = google_cloudfunctions2_function.function.project
+  location = google_cloudfunctions2_function.function.location
+  service  = google_cloudfunctions2_function.function.name
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${google_service_account.service_account.email}"
+}
