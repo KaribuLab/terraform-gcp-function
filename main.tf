@@ -46,13 +46,7 @@ resource "google_cloudfunctions2_function" "function" {
       }
     }
 
-    dynamic "environment_variables" {
-      for_each = var.function_build_environment_variables != null ? { for k, v in var.function_build_environment_variables : k => v } : {}
-      content {
-        key   = environment_variables.key
-        value = environment_variables.value
-      }
-    }
+    environment_variables = var.function_build_environment_variables
   }
 
   service_config {
@@ -66,16 +60,10 @@ resource "google_cloudfunctions2_function" "function" {
     ingress_settings                 = var.function_ingress_settings
     all_traffic_on_latest_revision   = var.function_all_traffic_on_latest_revision
     
-    dynamic "environment_variables" {
-      for_each = var.function_environment_variables != null ? var.function_environment_variables : {}
-      content {
-        key   = environment_variables.key
-        value = environment_variables.value
-      }
-    }
+    environment_variables = var.function_environment_variables
 
     dynamic "secret_environment_variables" {
-      for_each = var.function_secret_environment_variables != null ? var.function_secret_environment_variables : {}
+      for_each = var.function_secret_environment_variables != null ? nonsensitive(var.function_secret_environment_variables) : {}
       content {
         key        = secret_environment_variables.key
         project_id = var.project_id
@@ -85,7 +73,7 @@ resource "google_cloudfunctions2_function" "function" {
     }
 
     dynamic "secret_volumes" {
-      for_each = var.function_secret_volumes != null ? var.function_secret_volumes : {}
+      for_each = var.function_secret_volumes != null ? nonsensitive(var.function_secret_volumes) : {}
       content {
         mount_path = secret_volumes.value.mount_path
         project_id = var.project_id
