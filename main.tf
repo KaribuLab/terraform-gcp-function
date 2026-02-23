@@ -42,8 +42,9 @@ resource "google_cloudfunctions2_function" "function" {
 
     source {
       storage_source {
-        bucket = var.bucket_name
-        object = google_storage_bucket_object.archive.name
+        bucket     = var.bucket_name
+        object     = google_storage_bucket_object.archive.name
+        generation = google_storage_bucket_object.archive.generation
       }
     }
 
